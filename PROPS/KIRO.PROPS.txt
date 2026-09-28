@@ -1,0 +1,266 @@
+*=====================================================================*
+* DATASET  : Z50996.AI.KIRO.PROPERTIES                               *
+* TYPE     : PS (PHYSICAL SEQUENTIAL - FLAT FILE)                    *
+* PURPOSE  : CENTRAL REFERENCE FOR ALL Z50996.AI.KIRO.* DATASETS    *
+* CREATED  : 2026/09/27                                              *
+* OWNER    : Z50996                                                  *
+*=====================================================================*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.COBOL                            *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80  (STANDARD COBOL SOURCE WIDTH)               *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : COBOL SOURCE PROGRAMS (ONE MEMBER = ONE PROGRAM)*
+* USED BY          : COMPILE JCL - SYSIN DD                         *
+* COLUMN LAYOUT    : 1-6 SEQ, 7 INDICATOR, 8-11 AREA A,             *
+*                    12-72 AREA B, 73-80 IDENTIFICATION              *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.COPYBOOK                        *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80                                              *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : REUSABLE COPY MEMBERS (RECORD LAYOUTS,          *
+*                    WORKING-STORAGE, FILE DESCRIPTIONS)             *
+* USED BY          : COMPILE JCL - SYSLIB DD                        *
+* COBOL USAGE      : COPY membername.                                *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.OBJ                             *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80                                              *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : OBJECT DECKS - INTERMEDIATE COMPILER OUTPUT     *
+*                    NOT EXECUTABLE - INPUT TO LINK-EDIT STEP        *
+* WRITTEN BY       : COMPILER (IGYCRCTL) VIA SYSLIN DD              *
+* READ BY          : LINKAGE EDITOR (IEWL) VIA SYSLIN DD            *
+* NOTE             : BINARY CONTENT - DO NOT EDIT MANUALLY           *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.LOAD                            *
+* TYPE             : PDSE (PARTITIONED EXTENDED)                     *
+* DSORG            : PO                                              *
+* DSNTYPE          : LIBRARY  (PDSE - REQUIRED BY ACS POLICY)       *
+* RECFM            : U   (UNDEFINED - MANDATORY FOR LOAD MODULES)   *
+* LRECL            : N/A (NOT APPLICABLE FOR RECFM=U)               *
+* BLKSIZE          : 32760 (MAXIMUM FOR RECFM=U)                    *
+* SPACE            : TRK                                             *
+* PURPOSE          : EXECUTABLE LOAD MODULES (FINAL COMPILED OUTPUT) *
+* WRITTEN BY       : LINKAGE EDITOR (IEWL) VIA SYSLMOD DD           *
+* USED BY          : RUN JCL - STEPLIB DD                           *
+* NOTE             : BINARY EXECUTABLE - DO NOT EDIT MANUALLY        *
+*                    PDSE USED BECAUSE ACS REJECTS PDS FOR LOAD MODS *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.DBRM                            *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80                                              *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : DB2 DATABASE REQUEST MODULES                    *
+*                    PRODUCED BY DB2 PRECOMPILER (DSNHPC)            *
+*                    CONTAINS EXTRACTED SQL FROM COBOL SOURCE        *
+*                    MUST BE BOUND INTO DB2 PLAN BEFORE EXECUTION    *
+* USED ONLY WHEN   : WRITING COBOL PROGRAMS WITH EMBEDDED SQL        *
+* NOTE             : NOT NEEDED FOR PLAIN COBOL WITHOUT DB2/SQL      *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.JCL                             *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80  (STANDARD JCL CARD WIDTH)                  *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : JCL MEMBERS FOR COMPILE, RUN, UTILITY JOBS     *
+* MEMBERS          : ALLOCATE - CREATE ALL KIRO DATASETS             *
+*                    COMPILE  - COMPILE AND LINK-EDIT COBOL SOURCE   *
+*                    RUN      - EXECUTE COMPILED LOAD MODULE         *
+* SUBMIT VIA ZOWE  : zowe zos-jobs submit data-set                  *
+*                    "Z50996.AI.KIRO.JCL(membername)"               *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.PROCLIB                         *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80                                              *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : PRIVATE CATALOGUED JCL PROCEDURES (PROCs)      *
+*                    CALLED FROM JOBS VIA EXEC PROC=procname         *
+* REFERENCE IN JCL : //MYLIB JCLLIB ORDER=(Z50996.AI.KIRO.PROCLIB)  *
+* NOTE             : PROCS HAVE NO JOB CARD - CALLED BY JOBS ONLY   *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.BMS                             *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80                                              *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : CICS BMS MAP SOURCE (SCREEN DEFINITIONS)        *
+*                    ASSEMBLED TO PRODUCE PHYSICAL MAP AND           *
+*                    SYMBOLIC MAP (COPYBOOK FOR COBOL)               *
+* USED ONLY WHEN   : WRITING CICS ONLINE PROGRAMS                   *
+* NOTE             : NOT NEEDED FOR BATCH COBOL PROGRAMS             *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.LIST                            *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FBA (FIXED BLOCK + ANSI CARRIAGE CONTROL)      *
+* LRECL            : 133 (STANDARD PRINT LINE - 132 DATA + 1 CC)    *
+* BLKSIZE          : 27930 (MULTIPLE OF 133)                        *
+* SPACE            : TRK                                             *
+* PURPOSE          : COMPILER LISTING OUTPUT (SYSPRINT FROM COMPILE) *
+*                    CONTAINS SOURCE LISTING, ERROR MESSAGES,        *
+*                    DATA MAP, CROSS REFERENCE, COMPILE STATS        *
+* COMPILER MSGS    : IGYXXX-S SEVERE  RC=8  OBJECT NOT PRODUCED     *
+*                    IGYXXX-E ERROR    RC=8                          *
+*                    IGYXXX-W WARNING  RC=4  OBJECT PRODUCED         *
+*                    IGYXXX-I INFO     RC=0  NO ACTION NEEDED        *
+* NOTE             : FBA NEEDED BECAUSE COLUMN 1 IS CARRIAGE CONTROL *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.SYSOUT                          *
+* TYPE             : PDS (PARTITIONED)                               *
+* DSORG            : PO                                              *
+* RECFM            : FBA (FIXED BLOCK + ANSI CARRIAGE CONTROL)      *
+* LRECL            : 133                                             *
+* BLKSIZE          : 27930                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : SAVED ABEND DUMPS AND RUNTIME OUTPUT            *
+*                    WRITTEN WHEN PROGRAM ABENDS (CRASHES)           *
+* COMMON ABENDS    : S0C7 DATA EXCEPTION (NON-NUMERIC IN NUM FIELD)  *
+*                    S0C4 PROTECTION EXCEPTION (BAD STORAGE ADDRESS) *
+*                    S0CB DIVIDE EXCEPTION (DIVISION BY ZERO)        *
+*                    S013 DCB MISMATCH (WRONG LRECL OR RECFM)        *
+*                    S806 LOAD MODULE NOT FOUND IN STEPLIB           *
+*                    S322 TIME LIMIT EXCEEDED (INFINITE LOOP)        *
+*                    S837 DATASET OUT OF SPACE                       *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.INPUT                           *
+* TYPE             : PS (PHYSICAL SEQUENTIAL - FLAT FILE)           *
+* DSORG            : PS                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80  (ADJUST TO MATCH PROGRAM RECORD LAYOUT)    *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : INPUT TEST DATA RECORDS READ BY COBOL PROGRAM   *
+*                    POPULATE BEFORE RUNNING YOUR PROGRAM            *
+* IN RUN JCL       : //INFILE DD DSN=Z50996.AI.KIRO.INPUT,DISP=SHR  *
+* WARNING          : LRECL MUST MATCH FD RECORD LENGTH IN COBOL      *
+*                    MISMATCH CAUSES S013 ABEND AT RUNTIME           *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.OUTPUT                          *
+* TYPE             : PS (PHYSICAL SEQUENTIAL - FLAT FILE)           *
+* DSORG            : PS                                              *
+* RECFM            : FB  (FIXED BLOCK)                               *
+* LRECL            : 80  (ADJUST TO MATCH PROGRAM OUTPUT LAYOUT)    *
+* BLKSIZE          : 27920                                           *
+* SPACE            : TRK                                             *
+* PURPOSE          : OUTPUT RECORDS WRITTEN BY COBOL PROGRAM         *
+*                    BROWSE AFTER JOB RUNS TO VERIFY RESULTS         *
+* IN RUN JCL       : //OUTFILE DD DSN=Z50996.AI.KIRO.OUTPUT,        *
+*                              DISP=(MOD,CATLG,DELETE)              *
+* WARNING          : LRECL MUST MATCH FD RECORD LENGTH IN COBOL      *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.VSAM.KSDS                      *
+* TYPE             : VSAM KSDS (KEY SEQUENCED DATA SET)             *
+* KEYS             : 10 BYTES AT OFFSET 0                           *
+* RECORDSIZE       : 80 TO 200 BYTES                                 *
+* SPACE            : TRK                                             *
+* PURPOSE          : KEYED ACCESS - RANDOM OR SEQUENTIAL BY KEY      *
+*                    USE FOR MASTER FILES, CUSTOMER RECORDS ETC      *
+* ACCESS MODES     : RANDOM, SEQUENTIAL, DYNAMIC                     *
+* COBOL USAGE      : ORGANIZATION IS INDEXED                         *
+*                    ACCESS MODE IS RANDOM/SEQUENTIAL/DYNAMIC        *
+*                    RECORD KEY IS key-field                         *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.VSAM.ESDS                      *
+* TYPE             : VSAM ESDS (ENTRY SEQUENCED DATA SET)           *
+* RECORDSIZE       : 80 TO 200 BYTES                                 *
+* SPACE            : TRK                                             *
+* PURPOSE          : SEQUENTIAL OR RBA ACCESS (NO KEY)               *
+*                    USE FOR LOG FILES, AUDIT TRAILS                 *
+* ACCESS MODES     : SEQUENTIAL, BY RBA (RELATIVE BYTE ADDRESS)     *
+* COBOL USAGE      : ORGANIZATION IS SEQUENTIAL                      *
+*---------------------------------------------------------------------*
+*
+*---------------------------------------------------------------------*
+* DATASET          : Z50996.AI.KIRO.VSAM.RRDS                      *
+* TYPE             : VSAM RRDS (RELATIVE RECORD DATA SET)           *
+* RECORDSIZE       : 80 BYTES (FIXED)                               *
+* SPACE            : TRK                                             *
+* PURPOSE          : ACCESS BY RELATIVE RECORD NUMBER (1,2,3...)    *
+*                    USE FOR TABLE LOOKUPS, ARRAY-LIKE STRUCTURES    *
+* ACCESS MODES     : RANDOM, SEQUENTIAL, DYNAMIC                     *
+* COBOL USAGE      : ORGANIZATION IS RELATIVE                        *
+*                    ACCESS MODE IS RANDOM                           *
+*                    RELATIVE KEY IS key-field                       *
+*---------------------------------------------------------------------*
+*
+*=====================================================================*
+* ACS POLICY RULES FOR THIS SYSTEM (Z50996 - ZXPC)                  *
+*=====================================================================*
+* 1. SPACE UNIT    : MUST USE TRK OR K - CYL IS REJECTED BY ACS     *
+* 2. LOAD MODULES  : MUST USE DSNTYPE=LIBRARY (PDSE) NOT PDS         *
+*                    ACS REJECTS PDS FOR VERSION 3 LOAD MODULES      *
+* 3. ALLOCATION    : SIZE OVER 200KB IS REDUCED BY SMS AUTOMATICALLY *
+* 4. RECFM=U       : ONLY VALID FOR LOAD MODULE LIBRARIES            *
+* 5. RECFM=FBA     : REQUIRED FOR PRINT/LISTING DATASETS (LRECL=133) *
+*=====================================================================*
+*
+*=====================================================================*
+* COMPILE AND RUN FLOW SUMMARY                                       *
+*=====================================================================*
+* STEP 1 - WRITE SOURCE : Z50996.AI.KIRO.COBOL(pgmname)             *
+* STEP 2 - COMPILE JCL  : Z50996.AI.PRACTICE.JCL(COMPILE)          *
+*           COMPILER     : READS  COBOL(pgmname)  VIA SYSIN          *
+*                          READS  COPYBOOK        VIA SYSLIB         *
+*                          WRITES OBJ(pgmname)    VIA SYSLIN         *
+*                          WRITES LIST(pgmname)   VIA SYSPRINT       *
+*           LINK-EDIT    : READS  OBJ(pgmname)    VIA SYSLIN         *
+*                          WRITES LOAD(pgmname)   VIA SYSLMOD        *
+* STEP 3 - VERIFY        : CHECK LOAD(pgmname) EXISTS = COMPILE OK   *
+* STEP 4 - RUN JCL       : Z50996.AI.PRACTICE.JCL(RUN)              *
+*           EXECUTE      : PGM=pgmname                               *
+*                          STEPLIB = Z50996.AI.KIRO.LOAD             *
+*                          SYSOUT  = SYSOUT=*,OUTLIM=15000           *
+*                          CEEDUMP = DUMMY                           *
+*                          SYSUDUMP= DUMMY                           *
+* STEP 5 - CHECK RC      : RC=0000 SUCCESS                           *
+*                          RC=0004 WARNING - REVIEW OUTPUT           *
+*                          RC=0008 ERROR   - CHECK SYSOUT            *
+*=====================================================================*
