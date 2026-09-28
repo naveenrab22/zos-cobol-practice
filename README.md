@@ -13,6 +13,8 @@ All source files sourced from mainframe datasets under `Z50996.AI.KIRO.*`.
 | `JCL/` | `Z50996.AI.KIRO.JCL` | JCL jobs (compile, run, allocate) |
 | `COPYBOOK/` | `Z50996.AI.KIRO.COPYBOOK` | COPY members (reusable structures) |
 | `PROPS/` | `Z50996.AI.KIRO.PROPS` | Dataset properties reference |
+| `DATA/` | `Z50996.AI.KIRO.INPUT/OUTPUT` | Generic input/output test data (PS) |
+| `DATA/SORTFILE/` | `Z50996.AI.KIRO.SORTFILE.*` | SORTFILE program input and sorted output |
 
 ---
 
